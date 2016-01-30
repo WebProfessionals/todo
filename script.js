@@ -2,11 +2,41 @@ $(document).ready(function () {
     'use strict';
     projektListeLadenUndAufbauen();
     //init
-
+    var unserAktuellesProjekt;
 
     $('.projektauswahl').on('change', listeSetzen);
 
+
+    $('.eingabe').on('keypress', function (e) {
+        // Wenn enter gedrückt wird...
+        if (e.charCode === 13) {
+            neuenTaskHinzufuegen(this.value);
+
+
+            this.value = '';
+        }
+    });
+
+    function neuenTaskHinzufuegen(task) {
+        //TODO:: daten an server schicken und ID auswerten
+        // var id = addTask(task,unserAktuellesProjekt) <-id
+
+
+
+        var $task = $('<li/>', {
+            html: task,
+            class: 'offen',
+            "data-taskid": undefined,
+            "data-erledigt": false
+        });
+
+
+        $('#taskliste').append($task);
+    }
+
+
     function listeSetzen() {
+
         dieRiesengrosseListeDynamischLaden($(this).val());
     }
 
@@ -32,10 +62,13 @@ $(document).ready(function () {
     };
 
     function dieRiesengrosseListeDynamischLaden(liste) {
+        unserAktuellesProjekt = liste;
+
         $.ajax({
             type: 'GET',
             url: 'data/' + liste + '.json',
             success: function (jsonBody) {
+
                 TasklisteAktualisieren('#taskliste', jsonBody);
             },
             error: function (error) {
@@ -87,8 +120,9 @@ $(document).ready(function () {
 
     function taskAktualisieren(task, zielzustand) {
         //TODO: Daten an den Server senden
-    //Todo:: sende die daten an den Server
+        //Todo:: sende die daten an den Server
         console.dir(arguments);
     }
+
 
 });
