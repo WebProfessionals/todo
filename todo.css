@@ -1,0 +1,35 @@
+.erledigt {
+    text-decoration: line-through;
+    opacity: 0.4;
+}
+
+.faellig {
+    color: #ff5653;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul:hover{
+    cursor: pointer;
+}
+
+li {
+    content: '';
+    background-image: url('/media/offen.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    padding-left: 2em;
+}
+
+li.erledigt {
+    content: '';
+    background-image: url('/media/erledigt.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    padding-left: 2em;
+}
+
+li.erledigt svg

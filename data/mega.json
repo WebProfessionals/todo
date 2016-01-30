@@ -1,0 +1,15 @@
+ {
+    "projektname": "Mega",
+    "tasks": [
+      {
+        "id":3,
+        "task": "Aufgabe 00",
+        "erledigt": false
+      },
+      {
+        "id":4,
+        "task": "Aufgabe 2",
+        "erledigt": false
+      }
+    ]
+  }

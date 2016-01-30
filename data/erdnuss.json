@@ -1,0 +1,15 @@
+ {
+    "projektname": "Erdnuss",
+    "tasks": [
+      {
+        "id":1,
+        "task": "Allergene Testen",
+        "erledigt": true
+      },
+      {
+        "id":2,
+        "task": "Alternativen Suchen",
+        "erledigt": false
+      }
+    ]
+  }
