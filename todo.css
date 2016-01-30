@@ -15,13 +15,18 @@ input{
 ul {
     list-style: none;
     padding: 0;
-}
 
-ul:hover{
+}
+li{outline: none}
+li:focus{
+   font-style: italic;
+}
+li span:hover{
     cursor: pointer;
 }
 
-li {
+
+li span{
     content: '';
     background-image: url('/media/offen.svg');
     background-size: contain;
@@ -29,7 +34,7 @@ li {
     padding-left: 2em;
 }
 
-li.erledigt {
+li.erledigt span{
     content: '';
     background-image: url('/media/erledigt.svg');
     background-size: contain;

@@ -18,18 +18,19 @@ $(document).ready(function () {
     });
 
     function neuenTaskHinzufuegen(task) {
-        //TODO:: daten an server schicken und ID auswerten
+        //TODO:: daten an server schicken und ID auswerten und das ding mit der Zufallszahl entfernen!!!!
         // var id = addTask(task,unserAktuellesProjekt) <-id
-
-
+        var id = parseInt(Math.random() * 1000000);
 
         var $task = $('<li/>', {
             html: task,
             class: 'offen',
-            "data-taskid": undefined,
-            "data-erledigt": false
+            "data-taskid": id,
+            "data-erledigt": false,
+            contenteditable: true
         });
 
+        $task.prepend('<span></span>');
 
         $('#taskliste').append($task);
     }
@@ -92,8 +93,12 @@ $(document).ready(function () {
                 html: element.task,
                 class: istDerTaskErledigt(),
                 "data-taskid": element.id,
-                "data-erledigt": element.erledigt
+                "data-erledigt": element.erledigt,
+                contenteditable: true
             });
+
+            $task.prepend('<span></span>');
+
 
             function istDerTaskErledigt() {
                 if (element.erledigt) {
@@ -106,15 +111,39 @@ $(document).ready(function () {
         });
     }
 
+    $('#taskliste').on('keypress', function (event) {
+
+
+        // Wenn enter gedrückt wird...
+        if (event.charCode === 13) {
+            event.preventDefault();
+            var $task = $(event.target);
+            var neuerTextvomTask = $task[0].innerText;
+            var idvomTask = $task.data('taskid');
+
+            //TODO:: änderung an den Server schicken
+
+        }
+    });
+
     $('#taskliste').on('click', function (event) {
         var $task = $(event.toElement);
-        var taskId = $task.data('taskid');
 
-        var neuerZustand = !$task.data('erledigt');
+        if ($task.is('span')) {
+            // Aufgabe erledigt
+            $task = $task.parent();
+            var taskId = $task.data('taskid');
+            var neuerZustand = !$task.data('erledigt');
+            $task.data('erledigt', neuerZustand);
+            $task.toggleClass('erledigt');
+            taskAktualisieren(taskId, neuerZustand);
 
-        $task.data('erledigt', neuerZustand);
-        $task.toggleClass('erledigt');
-        taskAktualisieren(taskId, neuerZustand);
+        } else {
+
+
+        }
+
+
     });
 
 
