@@ -4,12 +4,14 @@
       {
         "id":3,
         "task": "Aufgabe 00",
-        "erledigt": false
+        "erledigt": false,
+        "faelligAm": "2016-03-17"
       },
       {
         "id":4,
         "task": "Aufgabe 2",
-        "erledigt": false
+        "erledigt": false,
+        "faelligAm": "2016-03-17"
       }
     ]
   }

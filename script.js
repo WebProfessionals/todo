@@ -1,5 +1,8 @@
 $(document).ready(function () {
     'use strict';
+
+    var modus = 'work';
+
     projektListeLadenUndAufbauen();
     //init
     var unserAktuellesProjekt;
@@ -17,20 +20,26 @@ $(document).ready(function () {
         }
     });
 
+
+    $('#modeswitcher').on('click',function(){
+
+        $('body').removeClass();
+        // Modus umschalten
+        if(modus === 'work'){
+            modus = 'edit';
+        }else{
+            modus = 'work';
+        }
+        $('body').addClass(modus);
+
+    });
+
     function neuenTaskHinzufuegen(task) {
         //TODO:: daten an server schicken und ID auswerten und das ding mit der Zufallszahl entfernen!!!!
         // var id = addTask(task,unserAktuellesProjekt) <-id
         var id = parseInt(Math.random() * 1000000);
 
-        var $task = $('<li/>', {
-            html: task,
-            class: 'offen',
-            "data-taskid": id,
-            "data-erledigt": false,
-            contenteditable: true
-        });
-
-        $task.prepend('<span></span>');
+        var $task = taskRendern({'task': task, id: id, erledigt: false, faelligAm: null});
 
         $('#taskliste').append($task);
     }
@@ -79,6 +88,27 @@ $(document).ready(function () {
     }
 
 
+    function taskRendern(taskElement) {
+        var $task = $('<li>', {
+            html: taskElement.task,
+            class: istDerTaskErledigt(),
+            "data-taskid": taskElement.id,
+            "data-erledigt": taskElement.erledigt,
+            contenteditable: true
+        });
+
+        $task.prepend('<span class="bullet"></span>');
+
+        function istDerTaskErledigt() {
+            if (taskElement.erledigt) {
+                return 'erledigt';
+            }
+            return 'offen';
+        }
+
+        return $task;
+    }
+
     /**
      * Aktualisiert eine Liste
      * @param selector (selector) Selektor für Zielelement and das die li angehängt werden
@@ -89,27 +119,11 @@ $(document).ready(function () {
         $taskliste.find('li').remove();
         daten.tasks.forEach(function (element) {
 
-            var $task = $('<li/>', {
-                html: element.task,
-                class: istDerTaskErledigt(),
-                "data-taskid": element.id,
-                "data-erledigt": element.erledigt,
-                contenteditable: true
-            });
-
-            $task.prepend('<span></span>');
-
-
-            function istDerTaskErledigt() {
-                if (element.erledigt) {
-                    return 'erledigt';
-                }
-                return 'offen';
-            }
-
+            var $task = taskRendern(element);
             $taskliste.append($task);
         });
     }
+
 
     $('#taskliste').on('keypress', function (event) {
 
@@ -129,7 +143,8 @@ $(document).ready(function () {
     $('#taskliste').on('click', function (event) {
         var $task = $(event.toElement);
 
-        if ($task.is('span')) {
+
+        if ($task.is('span') && modus === 'work') {
             // Aufgabe erledigt
             $task = $task.parent();
             var taskId = $task.data('taskid');
@@ -137,15 +152,22 @@ $(document).ready(function () {
             $task.data('erledigt', neuerZustand);
             $task.toggleClass('erledigt');
             taskAktualisieren(taskId, neuerZustand);
-
-        } else {
-
-
         }
 
+        if ($task.is('span') && modus === 'edit') {
+            // wir löschen den task
+            $task = $task.parent();
+            var taskId = $task.data('taskid');
+            taskLoeschen(taskId);
+            $task.remove();
 
+        }
     });
 
+    function taskLoeschen(taskId){
+        //TODO: Server über Löschen benachrichtigen
+        console.log(taskId + ' wurde gelöscht');
+    };
 
     function taskAktualisieren(task, zielzustand) {
         //TODO: Daten an den Server senden

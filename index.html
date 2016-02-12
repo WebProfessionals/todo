@@ -3,16 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Javascript 101</title>
-    <script src="jquery-2.2.0.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="script.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+
+    <script src="bower_components/moment/locale/de.js"></script>
     <link rel="stylesheet" href="todo.css">
 </head>
-<body>
+<body class="work">
 
 <select name="mirEgal" class="projektauswahl">
 </select>
 
+<button id="modeswitcher" class="edit">Bearbeiten</button>
 <input type="text" name="neuerTask" class="eingabe">
+<input type="date" name="datum" class="datum">
 
 <h2>Tasks</h2>
 <ul id="taskliste"></ul>

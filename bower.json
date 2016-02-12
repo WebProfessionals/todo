@@ -1,0 +1,22 @@
+{
+  "name": "jskurs",
+  "homepage": "https://github.com/WebProfessionals/todo",
+  "authors": [
+    "veith"
+  ],
+  "description": "Todo Applikation",
+  "main": "index.html",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "moment": "~2.11.2",
+    "jquery": "^2.2.0"
+  }
+}
