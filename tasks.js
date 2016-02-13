@@ -64,6 +64,14 @@ $(document).ready(function () {
                     });
                     $('.projektauswahl').append($option);
                 })
+
+                // Absprungpunkt einfügen
+                var $option = $('<option/>', {
+                    value: -1,
+                    html: 'Projektliste bearbeiten'
+                });
+                $('.projektauswahl').append($option);
+
             },
             error: function () {
                 alert("Der Server ist kapputt");
@@ -72,19 +80,27 @@ $(document).ready(function () {
     };
 
     function dieRiesengrosseListeDynamischLaden(liste) {
-        unserAktuellesProjekt = liste;
 
-        $.ajax({
-            type: 'GET',
-            url: 'data/' + liste + '.json',
-            success: function (jsonBody) {
+        if(liste === "-1"){
+            // Auf projektseite wechseln
 
-                TasklisteAktualisieren('#taskliste', jsonBody);
-            },
-            error: function (error) {
-                alert('nicht gefunden');
-            }
-        });
+
+
+        }else{
+            unserAktuellesProjekt = liste;
+
+            $.ajax({
+                type: 'GET',
+                url: 'data/' + liste + '.json',
+                success: function (jsonBody) {
+
+                    TasklisteAktualisieren('#taskliste', jsonBody);
+                },
+                error: function (error) {
+                    alert('nicht gefunden');
+                }
+            });
+        }
     }
 
 
