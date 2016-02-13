@@ -83,7 +83,7 @@ $(document).ready(function () {
 
         if(liste === "-1"){
             // Auf projektseite wechseln
-
+            window.location.href = "projekt.html";
 
 
         }else{

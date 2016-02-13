@@ -1,13 +1,17 @@
 [
   {
     "id": "erdnuss",
-    "label": "Erdnuss"
+    "label": "Erdnuss",
+    "alleTasksErledigt": true
   },
   {
     "id": "mega",
-    "label": "Mega"
-  }, {
+    "label": "Mega",
+    "alleTasksErledigt": false
+  },
+  {
     "id": "koko",
-    "label": "Kokosnuss"
+    "label": "Kokosnuss",
+    "alleTasksErledigt": false
   }
 ]

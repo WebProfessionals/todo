@@ -28,7 +28,7 @@ li span:hover{
 
 li span.bullet{
     content: '';
-    background-image: url('/media/offen.svg');
+    background-image: url('./media/offen.svg');
     background-size: contain;
     background-repeat: no-repeat;
     padding-left: 2em;
@@ -36,7 +36,7 @@ li span.bullet{
 
 li.erledigt span.bullet{
     content: '';
-    background-image: url('/media/erledigt.svg');
+    background-image: url('./media/erledigt.svg');
     background-size: contain;
     background-repeat: no-repeat;
     padding-left: 2em;
@@ -46,7 +46,7 @@ li.erledigt span.bullet{
 
 body.edit ul li span.bullet{
     content: '';
-    background-image: url('/media/delete.svg');
+    background-image: url('./media/delete.svg');
     background-size: contain;
     background-repeat: no-repeat;
     padding-left: 2em;
