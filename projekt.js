@@ -69,4 +69,22 @@ $(document).ready(function () {
         var id = projektname;
         addProjekt(projektname, id);
     }
+
+
+
+
+    $projektliste.on('keypress', function (event) {
+        // Wenn enter gedrückt wird...
+        if (event.charCode === 13) {
+            event.preventDefault(); // event nicht weiter geben
+            var $projekt = $(event.target); // auf welchem element ist es passiert
+            var idVomProjekt = $projekt.attr('id');
+            console.dir($projekt);
+
+            var neuerName = $projekt.text();
+            //TODO:: änderung an den Server schicken
+            console.dir(idVomProjekt + ', ' + neuerName);
+
+        }
+    });
 });
