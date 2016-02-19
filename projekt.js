@@ -2,8 +2,11 @@ $(document).ready(function () {
     'use strict';
 
     //add back link
-    $( "body" ).prepend( "<a href='/index.html'>zurück zu Tasks</a>" );
-    
+    var $link = $("<a/>", {href: '/index.html', text: 'zurück zu Tasks'});
+    $("body").prepend($link);
+
+    var $projektliste = $('#projektliste');
+
     var modus = 'work';
 
     $('#modeswitcher').on('click', function () {
@@ -29,17 +32,41 @@ $(document).ready(function () {
         }
     });
 
+
+
     function projektlisteParsen(jsondata) {
-        var $projektliste = $('#projektliste');
+
         jsondata.forEach(function (e) {
-
-            var $projekt = $('<li/>', {'contenteditable': true, html: e.label, id: e.id});
-            var $bullet = $('<span/>', {class: 'bullet'});
-
-            $projekt.prepend($bullet);
-
-            $projektliste.append($projekt)
+            addProjekt(e.label,e.id);
         });
     }
 
+    /**
+     * Fügt ein Projekt der Liste hinzu (nur UI)
+     * @param label
+     * @param id
+     */
+    function addProjekt(label,id) {
+        var $projekt = $('<li/>', {'contenteditable': true, html: label, id: id});
+        var $bullet = $('<span/>', {class: 'bullet'});
+        $projekt.prepend($bullet);
+        $projektliste.append($projekt);
+    }
+
+    // Auf  Input Feld ...
+    $('.eingabe').on('keypress', function (e) {
+        // bei drücken von Enter (Zeichen #13) soll dieser eingegebene Text in die Liste angehängt werden
+        if (e.charCode === 13) {
+            projektAdden(this.value);
+            // und das Eingabefeld wieder leer sein
+            this.value = '';
+        }
+    });
+
+    // Projekt an server schicken und in die Liste eintragen
+    function projektAdden(projektname){
+        //TODO:: projektname an den Server senden
+        var id = projektname;
+        addProjekt(projektname, id);
+    }
 });
