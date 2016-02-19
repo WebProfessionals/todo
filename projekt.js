@@ -1,7 +1,9 @@
 $(document).ready(function () {
     'use strict';
 
-
+    //add back link
+    $( "body" ).prepend( "<a href='/index.html'>zurück zu Tasks</a>" );
+    
     var modus = 'work';
 
     $('#modeswitcher').on('click', function () {
