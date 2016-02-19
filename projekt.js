@@ -2,7 +2,7 @@ $(document).ready(function () {
     'use strict';
 
     //add back link
-    var $link = $("<a/>", {href: '/index.html', text: 'zurück zu Tasks'});
+    var $link = $("<a/>", {href: './index.html', text: 'zurück zu Tasks'});
     $("body").prepend($link);
 
     var $projektliste = $('#projektliste');
