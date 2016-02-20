@@ -43,6 +43,11 @@ li.erledigt span.bullet{
 }
 
 
+li.allesErledigt {
+color:#BADA55;
+}
+
+
 
 body.edit ul li span.bullet{
     content: '';

@@ -33,11 +33,10 @@ $(document).ready(function () {
     });
 
 
-
     function projektlisteParsen(jsondata) {
 
         jsondata.forEach(function (e) {
-            addProjekt(e.label,e.id);
+            addProjekt(e.label, e.id, e.alleTasksErledigt);
         });
     }
 
@@ -45,9 +44,19 @@ $(document).ready(function () {
      * Fügt ein Projekt der Liste hinzu (nur UI)
      * @param label
      * @param id
+     * @param erledigt (bool) Indikator der anzeigt ob alle Tasks in diesem Projekt erledigt sind
+     *
      */
-    function addProjekt(label,id) {
-        var $projekt = $('<li/>', {'contenteditable': true, html: label, id: id});
+    function addProjekt(label, id, erledigt) {
+
+
+        var $projekt = $('<li/>', {
+            contenteditable: true,
+            html: label,
+            id: id,
+            class: (erledigt) ? 'allesErledigt' : ''
+        }); // ternary operator, siehe https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
+
         var $bullet = $('<span/>', {class: 'bullet'});
         $projekt.prepend($bullet);
         $projektliste.append($projekt);
@@ -64,13 +73,11 @@ $(document).ready(function () {
     });
 
     // Projekt an server schicken und in die Liste eintragen
-    function projektAdden(projektname){
+    function projektAdden(projektname) {
         //TODO:: projektname an den Server senden
         var id = projektname;
         addProjekt(projektname, id);
     }
-
-
 
 
     $projektliste.on('keypress', function (event) {
