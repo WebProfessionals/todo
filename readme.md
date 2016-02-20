@@ -1,8 +1,7 @@
 #Beispiel TODO APP
 
 Aufgabe: 
-Beim Klicken auf ein view icon In der Projektübersicht, sollte auf die Taskliste gewechselt werden und das entsprechende Projekt geöffnet sein.
+Bei der Taskliste sollte das entsprechend gesetzte Projekt direkt geöffnet werden.
  
  TIPP: 
- Die URL wird folgendermassen aussehen:
- **/index.html?projekt=erdnuss**
+ mit der Funktion **getParameterByName('xxx')**  können wir den Parameter auslesen
