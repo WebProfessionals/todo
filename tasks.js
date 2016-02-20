@@ -21,13 +21,13 @@ $(document).ready(function () {
     });
 
 
-    $('#modeswitcher').on('click',function(){
+    $('#modeswitcher').on('click', function () {
 
         $('body').removeClass();
         // Modus umschalten
-        if(modus === 'work'){
+        if (modus === 'work') {
             modus = 'edit';
-        }else{
+        } else {
             modus = 'work';
         }
         $('body').addClass(modus);
@@ -46,8 +46,8 @@ $(document).ready(function () {
 
 
     function listeSetzen() {
+        window.location.href = "index.html?projekt=" + $(this).val();
 
-        dieRiesengrosseListeDynamischLaden($(this).val());
     }
 
     function projektListeLadenUndAufbauen() {
@@ -55,7 +55,7 @@ $(document).ready(function () {
             type: 'GET',
             url: 'data/projektliste.json',
             success: function (projektliste) {
-                dieRiesengrosseListeDynamischLaden(projektliste[0].id);
+
                 projektliste.forEach(function (element) {
 
                     var $option = $('<option/>', {
@@ -63,7 +63,18 @@ $(document).ready(function () {
                         html: element.label
                     });
                     $('.projektauswahl').append($option);
-                })
+                });
+
+                // Vorausgesetztes Projekt ermitteln
+                var projekt = getParameterByName('projekt');
+                if (projekt) {
+                    // dropdown auf gewähltes Projekt setzen
+                    $('.projektauswahl').val(projekt);
+                } else {
+                    projekt = projektliste[0].id;
+                }
+
+                dieRiesengrosseListeDynamischLaden(projekt);
 
                 // Absprungpunkt einfügen
                 var $option = $('<option/>', {
@@ -79,19 +90,19 @@ $(document).ready(function () {
         });
     };
 
-    function dieRiesengrosseListeDynamischLaden(liste) {
+    function dieRiesengrosseListeDynamischLaden(projektListe) {
 
-        if(liste === "-1"){
+        if (projektListe === "-1") {
             // Auf projektseite wechseln
             window.location.href = "projekt.html";
 
 
-        }else{
-            unserAktuellesProjekt = liste;
+        } else {
+            unserAktuellesProjekt = projektListe;
 
             $.ajax({
                 type: 'GET',
-                url: 'data/' + liste + '.json',
+                url: 'data/' + projektListe + '.json',
                 success: function (jsonBody) {
 
                     TasklisteAktualisieren('#taskliste', jsonBody);
@@ -180,7 +191,7 @@ $(document).ready(function () {
         }
     });
 
-    function taskLoeschen(taskId){
+    function taskLoeschen(taskId) {
         //TODO: Server über Löschen benachrichtigen
         console.log(taskId + ' wurde gelöscht');
     };
@@ -192,13 +203,13 @@ $(document).ready(function () {
     }
 
 
-    function getParameterByName( name ){
-        var regexS = "[\\?&]"+name+"=([^&#]*)",
-            regex = new RegExp( regexS ),
-            results = regex.exec( window.location.search );
-        if( results == null ){
+    function getParameterByName(name) {
+        var regexS = "[\\?&]" + name + "=([^&#]*)",
+            regex = new RegExp(regexS),
+            results = regex.exec(window.location.search);
+        if (results == null) {
             return "";
-        } else{
+        } else {
             return decodeURIComponent(results[1].replace(/\+/g, " "));
         }
     }
