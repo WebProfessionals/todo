@@ -49,6 +49,7 @@ $(document).ready(function () {
      */
     function addProjekt(label, id, erledigt) {
 
+        label = label || 'unbekannt'; // wir geben dem label den defaultwert unbekannt
 
         var $projekt = $('<li/>', {
             contenteditable: true,
@@ -57,8 +58,8 @@ $(document).ready(function () {
             class: (erledigt) ? 'allesErledigt' : ''
         }); // ternary operator, siehe https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
 
-        var $bullet = $('<span/>', {class: 'bullet'});
-        $projekt.prepend($bullet);
+        var $icon = $('<span/>', {class: 'icon'});
+        $projekt.prepend($icon);
         $projektliste.append($projekt);
     }
 
@@ -86,12 +87,39 @@ $(document).ready(function () {
             event.preventDefault(); // event nicht weiter geben
             var $projekt = $(event.target); // auf welchem element ist es passiert
             var idVomProjekt = $projekt.attr('id');
-            console.dir($projekt);
+
 
             var neuerName = $projekt.text();
             //TODO:: änderung an den Server schicken
-            console.dir(idVomProjekt + ', ' + neuerName);
 
         }
     });
+
+    // wenn wir auf ein Projekt clicken
+    $projektliste.on('click', function (event) {
+
+        // und wir im modus "edit" sind und auf den Kübel drücken (span)
+        if (modus === 'edit' && $(event.target).is('span.icon')) {
+            // ermitteln wir das projekt
+            var $projekt = $(event.target).parent();
+
+            // und. die Projektid attr('id')
+            var projektID = $projekt.attr('id');
+            // wir teilen dem Server mit, dass er das Projekt löschen soll
+            projektLoeschen(projektID);
+            // wir entfernen das Projekt aus der liste
+            $projekt.remove();
+        }
+
+        if (modus === 'work' && $(event.target).is('span.icon')) {
+        alert(323223);
+        }
+
+
+    });
+
+    function projektLoeschen(projektID) {
+        //TODO: Info an server senden, er soll bitte das Projekt mit der entsprechenden ID löschen
+    }
+
 });

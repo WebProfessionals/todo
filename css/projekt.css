@@ -1,0 +1,36 @@
+.erledigt {
+    text-decoration: line-through;
+    opacity: 0.4;
+}
+
+.faellig {
+    color: #ff5653;
+}
+
+li span:hover{
+    cursor: pointer;
+}
+
+
+li span.icon{
+    content: '';
+    background-image: url('../media/taskliste.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    padding-left: 2em;
+}
+
+li.allesErledigt {
+    color:#BADA55;
+}
+
+
+
+body.edit ul li span.icon{
+    content: '';
+    background-image: url('../media/delete.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    padding-left: 2em;
+}
+

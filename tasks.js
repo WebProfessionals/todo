@@ -113,7 +113,7 @@ $(document).ready(function () {
             contenteditable: true
         });
 
-        $task.prepend('<span class="bullet"></span>');
+        $task.prepend('<span class="icon"></span>');
 
         function istDerTaskErledigt() {
             if (taskElement.erledigt) {
