@@ -214,5 +214,9 @@ $(document).ready(function () {
         }
     }
 
+    function getHashParameterByName(name) {
+
+    }
+
 
 });
