@@ -98,21 +98,24 @@ $(document).ready(function () {
     // wenn wir auf ein Projekt clicken
     $projektliste.on('click', function (event) {
 
+        // ermitteln wir das projekt
+        var $projekt = $(event.target).parent();
+        // und. die Projektid attr('id')
+        var projektID = $projekt.attr('id');
+
         // und wir im modus "edit" sind und auf den Kübel drücken (span)
         if (modus === 'edit' && $(event.target).is('span.icon')) {
-            // ermitteln wir das projekt
-            var $projekt = $(event.target).parent();
 
-            // und. die Projektid attr('id')
-            var projektID = $projekt.attr('id');
             // wir teilen dem Server mit, dass er das Projekt löschen soll
             projektLoeschen(projektID);
             // wir entfernen das Projekt aus der liste
             $projekt.remove();
         }
 
+
         if (modus === 'work' && $(event.target).is('span.icon')) {
-        alert(323223);
+            // wir leiten auf die index page um
+            window.location.href = "index.html?projekt=" + projektID;
         }
 
 
