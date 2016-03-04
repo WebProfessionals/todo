@@ -5,6 +5,7 @@ $(document).ready(function () {
 
     projektListeLadenUndAufbauen();
     //init
+
     var unserAktuellesProjekt;
 
     $('.projektauswahl').on('change', listeSetzen);
@@ -14,15 +15,12 @@ $(document).ready(function () {
         // Wenn enter gedrückt wird...
         if (e.charCode === 13) {
             neuenTaskHinzufuegen(this.value);
-
-
             this.value = '';
         }
     });
 
 
     $('#modeswitcher').on('click', function () {
-
         $('body').removeClass();
         // Modus umschalten
         if (modus === 'work') {
@@ -153,8 +151,6 @@ $(document).ready(function () {
 
 
     $('#taskliste').on('keypress', function (event) {
-
-
         // Wenn enter gedrückt wird...
         if (event.charCode === 13) {
             event.preventDefault();
@@ -178,30 +174,21 @@ $(document).ready(function () {
             var neuerZustand = !$task.data('erledigt');
             $task.data('erledigt', neuerZustand);
             $task.toggleClass('erledigt');
-            taskAktualisieren(taskId, neuerZustand);
+            taskDS.taskAktualisieren(taskId, neuerZustand);
         }
 
         if ($task.is('span') && modus === 'edit') {
             // wir löschen den task
             $task = $task.parent();
             var taskId = $task.data('taskid');
-            taskLoeschen(taskId);
+            taskDS.taskLoeschen(taskId);
             $task.remove();
 
         }
     });
 
-    function taskLoeschen(taskId) {
-        //TODO: Server über Löschen benachrichtigen
-        console.log(taskId + ' wurde gelöscht');
-    };
-
-    function taskAktualisieren(task, zielzustand) {
-        //TODO: Daten an den Server senden
-        //Todo:: sende die daten an den Server
-        console.dir(arguments);
-    }
-
+ 
+    
 
     function getParameterByName(name) {
         var regexS = "[\\?&]" + name + "=([^&#]*)",
