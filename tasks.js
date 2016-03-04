@@ -3,10 +3,21 @@ $(document).ready(function () {
 
     var modus = 'work';
 
-    projektListeLadenUndAufbauen();
+    // Vorausgesetztes Projekt ermitteln
+    var projekt = getParameterByName('projekt');
+    
+    
     //init
-
-    var unserAktuellesProjekt;
+    taskDS.projektListeLadenUndAufbauen( function (projektliste) {
+        if (projekt) {
+            // dropdown auf gewähltes Projekt setzen
+            $('.projektauswahl').val(projekt);
+        } else {
+            projekt = projektliste[0].id;
+        }
+        taskDS.dieRiesengrosseListeDynamischLaden(projekt,TasklisteAktualisieren);
+    });
+    
 
     $('.projektauswahl').on('change', listeSetzen);
 
@@ -14,7 +25,9 @@ $(document).ready(function () {
     $('.eingabe').on('keypress', function (e) {
         // Wenn enter gedrückt wird...
         if (e.charCode === 13) {
-            neuenTaskHinzufuegen(this.value);
+            var id = taskDS.neuenTaskHinzufuegen(this.value);
+            var $task = taskRendern({'task': this.value, id: id, erledigt: false, faelligAm: null});
+            $('#taskliste').append($task);
             this.value = '';
         }
     });
@@ -32,15 +45,7 @@ $(document).ready(function () {
 
     });
 
-    function neuenTaskHinzufuegen(task) {
-        //TODO:: daten an server schicken und ID auswerten und das ding mit der Zufallszahl entfernen!!!!
-        // var id = addTask(task,unserAktuellesProjekt) <-id
-        var id = parseInt(Math.random() * 1000000);
-
-        var $task = taskRendern({'task': task, id: id, erledigt: false, faelligAm: null});
-
-        $('#taskliste').append($task);
-    }
+    
 
 
     function listeSetzen() {
@@ -48,71 +53,7 @@ $(document).ready(function () {
 
     }
 
-    function projektListeLadenUndAufbauen() {
-        $.ajax({
-            type: 'GET',
-            url: 'data/projektliste.json',
-            success: function (projektliste) {
-
-                projektliste.forEach(function (element) {
-
-                    var $option = $('<option/>', {
-                        value: element.id,
-                        html: element.label
-                    });
-                    $('.projektauswahl').append($option);
-                });
-
-                // Vorausgesetztes Projekt ermitteln
-                var projekt = getParameterByName('projekt');
-                if (projekt) {
-                    // dropdown auf gewähltes Projekt setzen
-                    $('.projektauswahl').val(projekt);
-                } else {
-                    projekt = projektliste[0].id;
-                }
-
-                dieRiesengrosseListeDynamischLaden(projekt);
-
-                // Absprungpunkt einfügen
-                var $option = $('<option/>', {
-                    value: -1,
-                    html: 'Projektliste bearbeiten'
-                });
-                $('.projektauswahl').append($option);
-
-            },
-            error: function () {
-                alert("Der Server ist kapputt");
-            }
-        });
-    };
-
-    function dieRiesengrosseListeDynamischLaden(projektListe) {
-
-        if (projektListe === "-1") {
-            // Auf projektseite wechseln
-            window.location.href = "projekt.html";
-
-
-        } else {
-            unserAktuellesProjekt = projektListe;
-
-            $.ajax({
-                type: 'GET',
-                url: 'data/' + projektListe + '.json',
-                success: function (jsonBody) {
-
-                    TasklisteAktualisieren('#taskliste', jsonBody);
-                },
-                error: function (error) {
-                    alert('nicht gefunden');
-                }
-            });
-        }
-    }
-
-
+    
     function taskRendern(taskElement) {
         var $task = $('<li>', {
             html: taskElement.task,
@@ -157,9 +98,7 @@ $(document).ready(function () {
             var $task = $(event.target);
             var neuerTextvomTask = $task[0].innerText;
             var idvomTask = $task.data('taskid');
-
-            //TODO:: änderung an den Server schicken
-
+            taskDS.updateTask(idvomTask,neuerTextvomTask);
         }
     });
 
