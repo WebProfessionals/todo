@@ -33,10 +33,14 @@ $(document).ready(function () {
     $('.eingabe').on('keypress', function (e) {
         // Wenn enter gedrückt wird...
         if (e.charCode === 13) {
-            var id = taskDS.neuenTaskHinzufuegen(this.value);
-            var $task = taskRendern({'task': this.value, id: id, erledigt: false, faelligAm: null});
-            $('#taskliste').append($task);
+
+            var text = this.value;
+            var id = taskDS.neuenTaskHinzufuegen(projekt,text,function (id) {
+                var $task = taskRendern({'task': text, id: id, erledigt: false, faelligAm: null});
+                $('#taskliste').append($task);
+            });
             this.value = '';
+
         }
     });
 
@@ -106,7 +110,7 @@ $(document).ready(function () {
             var $task = $(event.target);
             var neuerTextvomTask = $task[0].innerText;
             var idvomTask = $task.data('taskid');
-            taskDS.updateTask(idvomTask,neuerTextvomTask);
+            taskDS.updateTask(projekt,idvomTask,neuerTextvomTask);
         }
     });
 

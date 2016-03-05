@@ -1,17 +1,1 @@
- {
-    "projektname": "Mega",
-    "tasks": [
-      {
-        "id":3,
-        "task": "Aufgabe 00",
-        "erledigt": false,
-        "faelligAm": "2016-03-17"
-      },
-      {
-        "id":4,
-        "task": "Aufgabe 2",
-        "erledigt": false,
-        "faelligAm": "2016-03-17"
-      }
-    ]
-  }
+{"projektname":"Mega","tasks":[{"id":0,"task":"Aufgabe 00","erledigt":false},{"id":1,"task":"Aufgabe 2","erledigt":false},{"id":4,"task":"kjjdfgsjkldfgsjkl gdfgfd","erledigt":false},{"id":5,"task":"kjjdfgsjkldfgsjkl gdfgfd","erledigt":false},{"id":6,"task":"kjjdfgsjkldfgsjkl gdfgfd","erledigt":false},{"id":7,"task":"Neuer Task","erledigt":false},{"id":8,"task":"sfdsfddsf","erledigt":false},{"id":9,"task":"dsffssdf","erledigt":false},{"id":10,"task":"sdffsdfds","erledigt":false},{"id":11,"task":"Neuer Task","erledigt":false},{"id":12,"task":"Neuer Task","erledigt":false},{"id":13,"task":"Neuer Task","erledigt":false}],"idcounter":14}

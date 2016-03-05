@@ -8,10 +8,10 @@
  */
 
 $id = $_REQUEST["id"];
-header('Content-Type: application/json');
 
 $fp = fopen("../data/{$id}.json",'rb');
 if($fp != false){
+    header('Content-Type: application/json');
     fpassthru($fp);
 }else{
     header("HTTP/1.0 400 Nicht existierende Liste");

@@ -15,9 +15,21 @@ var taskDS = function () {
      * @param id (id) ID des Tasks
      * @param text (string) Neuer Text vom Task
      */
-    function updateTask(id, text) {
-        //TODO:: änderung an den Server schicken
-        console.log(id, text);
+    function updateTask(projekt, taskID, text) {
+        
+        $.ajax({
+            type: 'GET',
+            dataType: "json",
+            data:{listeID:projekt,task:text,taskID:taskID},
+            url: 'api/task.php?method=update',
+            success: function (jsonBody) {
+                callback(jsonBody.id);
+
+            },
+            error: function (error) {
+                alert(error);
+            }
+        });
     }
 
     /**
@@ -25,11 +37,20 @@ var taskDS = function () {
      * @param task (string) Text vom Task
      * @returns {Number} (id) die ID des Tasks
      */
-    function neuenTaskHinzufuegen(task) {
-        //TODO:: daten an server schicken und ID auswerten und das ding mit der Zufallszahl entfernen!!!!
+    function neuenTaskHinzufuegen(projekt,text,callback) {
+        $.ajax({
+            type: 'GET',
+            dataType: "json",
+            data:{listeID:projekt,task:text},
+            url: 'api/task.php?method=create',
+            success: function (jsonBody) {
+                callback(jsonBody.id);
 
-        var id = parseInt(Math.random() * 1000000);
-        return id;
+            },
+            error: function (error) {
+                alert(error);
+            }
+        });
     }
 
 

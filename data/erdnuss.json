@@ -1,35 +1,46 @@
- {
-    "projektname": "Erdnuss",
-    "tasks": [
-      {
-        "id":1,
-        "task": "Allergene Testen",
-        "erledigt": true,
-        "faelligAm": "2016-03-17"
-      },
-      {
-        "id":2,
-        "task": "Alternativen Suchen",
-        "erledigt": false,
-        "faelligAm": null
-      },
-      {
-        "id":3,
-        "task": "Alternativen Suchen",
-        "erledigt": false,
-        "faelligAm": null
-      },
-      {
-        "id":4,
-        "task": "Alternativen Suchen",
-        "erledigt": false,
-        "faelligAm": null
-      },
-      {
-        "id":5,
-        "task": "Alternativen Suchen",
-        "erledigt": false,
-        "faelligAm": null
-      }
-    ]
-  }
+{
+  "projektname": "Erdnuss",
+  "tasks": [
+    {
+      "id": 1,
+      "task": "Allergene Testen",
+      "erledigt": true,
+      "faelligAm": "2016-03-17"
+    },
+    {
+      "id": 2,
+      "task": "Alternativen Suchen",
+      "erledigt": false,
+      "faelligAm": null
+    },
+    {
+      "id": 3,
+      "task": "Alternativen Suchen",
+      "erledigt": false,
+      "faelligAm": null
+    },
+    {
+      "id": 4,
+      "task": "Alternativen Suchen",
+      "erledigt": false,
+      "faelligAm": null
+    },
+    {
+      "id": 5,
+      "task": "Alternativen Suchen",
+      "erledigt": false,
+      "faelligAm": null
+    },
+    {
+      "id": 6,
+      "task": "hhhhhh",
+      "erledigt": false
+    },
+    {
+      "id": 100,
+      "task": "Erdnuss",
+      "erledigt": false
+    }
+  ],
+  "idcounter": 101
+}
