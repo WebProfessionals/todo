@@ -3,20 +3,17 @@ session_start();
 
 // entsprechende impl. laden
 switch ($_REQUEST['method']) {
-    case "add":
-        include("add.php");
+    case "create":
+        include("task/create.php");
         break;
     case "delete":
-        include("delete.php");
+        include("task/delete.php");
         break;
-    case "read":
-        include("read.php");
+    case "list":
+        include("task/list.php");
         break;
     case "update":
-        include("update.php");
-        break;
-    case "createProjekt":
-        include("createProjekt.php");
+        include("task/update.php");
         break;
     default:
         header("HTTP/1.0 400 Unerlaubte Methode");

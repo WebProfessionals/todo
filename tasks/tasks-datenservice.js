@@ -97,7 +97,8 @@ var taskDS = function () {
             $.ajax({
                 type: 'GET',
                 dataType: "json",
-                url: 'data/' + projektListe + '.json',
+                data:{id:projektListe},
+                url: 'api/task.php?method=list',
                 success: function (jsonBody) {
                     callback('#taskliste',jsonBody);
 
