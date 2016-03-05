@@ -8,14 +8,22 @@ $(document).ready(function () {
     
     
     //init
-    taskDS.projektListeLadenUndAufbauen( function (projektliste) {
+    taskDS.projektListeLaden( function (serverAntwort) {
         if (projekt) {
             // dropdown auf gewähltes Projekt setzen
             $('.projektauswahl').val(projekt);
         } else {
-            projekt = projektliste[0].id;
+            projekt = serverAntwort[0].id;
         }
-        taskDS.dieRiesengrosseListeDynamischLaden(projekt,TasklisteAktualisieren);
+
+        // Absprungpunkt einfügen
+        var $option = $('<option/>', {
+            value: -1,
+            html: 'Projektliste bearbeiten'
+        });
+        $('.projektauswahl').append($option);
+
+        taskDS.TasklisteLaden(projekt,TasklisteAktualisieren);
     });
     
 
@@ -104,7 +112,6 @@ $(document).ready(function () {
 
     $('#taskliste').on('click', function (event) {
         var $task = $(event.toElement);
-
 
         if ($task.is('span') && modus === 'work') {
             // Aufgabe erledigt

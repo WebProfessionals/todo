@@ -6,8 +6,8 @@ var taskDS = function () {
         taskLoeschen: taskLoeschen,
         neuenTaskHinzufuegen: neuenTaskHinzufuegen,
         updateTask: updateTask,
-        projektListeLadenUndAufbauen: projektListeLadenUndAufbauen,
-        dieRiesengrosseListeDynamischLaden:dieRiesengrosseListeDynamischLaden
+        projektListeLaden: projektListeLaden,
+        TasklisteLaden:TasklisteLaden
     };
 
     /**
@@ -27,15 +27,29 @@ var taskDS = function () {
      */
     function neuenTaskHinzufuegen(task) {
         //TODO:: daten an server schicken und ID auswerten und das ding mit der Zufallszahl entfernen!!!!
-        // var id = addTask(task,unserAktuellesProjekt) <-id
-        var id = parseInt(Math.random() * 1000000);
 
+        var id = parseInt(Math.random() * 1000000);
         return id;
     }
 
+
+    /**
+     * Löscht einen Task anhand der übergebenen ID
+     * @param taskId (id) ID eines Tasks
+     */
     function taskLoeschen(taskId) {
         //TODO: Server über Löschen benachrichtigen
-        console.log(taskId + ' wurde gelöscht');
+        $.ajax({
+            type:"POST",
+            url:"/api/deleteTask.php",
+            data:{task:taskId},
+            success: function (r) {
+                console.log(taskId + ' wurde gelöscht');
+            },
+            error: function (err) {
+                console.dir(err)
+            }
+        });
     };
 
 
@@ -45,14 +59,15 @@ var taskDS = function () {
         console.dir(arguments);
     }
 
-    function projektListeLadenUndAufbauen(callback) {
+    
+    function projektListeLaden(callback) {
         $.ajax({
             type: 'GET',
+            dataType: "json",
             url: 'data/projektliste.json',
-            success: function (projektliste) {
+            success: function (projektJson) {
 
-                projektliste.forEach(function (element) {
-
+                projektJson.forEach(function (element) {
                     var $option = $('<option/>', {
                         value: element.id,
                         html: element.label
@@ -60,16 +75,8 @@ var taskDS = function () {
                     $('.projektauswahl').append($option);
                 });
                 
-                callback(projektliste);
-
-
-                // Absprungpunkt einfügen
-                var $option = $('<option/>', {
-                    value: -1,
-                    html: 'Projektliste bearbeiten'
-                });
-                $('.projektauswahl').append($option);
-
+                callback(projektJson);
+                
             },
             error: function () {
                 alert("Der Server ist kapputt");
@@ -77,7 +84,7 @@ var taskDS = function () {
         });
     };
 
-    function dieRiesengrosseListeDynamischLaden(projektListe, callback) {
+    function TasklisteLaden(projektListe, callback) {
 
         if (projektListe === "-1") {
             // Auf projektseite wechseln
@@ -89,6 +96,7 @@ var taskDS = function () {
 
             $.ajax({
                 type: 'GET',
+                dataType: "json",
                 url: 'data/' + projektListe + '.json',
                 success: function (jsonBody) {
                     callback('#taskliste',jsonBody);
