@@ -1,5 +1,6 @@
 #Beispiel TODO APP
 
-Aufgabe:Die ? in der URL mit # ersetzen.
+Aufgabe: PHP update Task schreiben. 
 
-TIPP: **getHashParameterByName()** ist euer helfer
+TIPP: ist sehr ähnlich dem create Task
+ 
