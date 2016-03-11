@@ -134,7 +134,7 @@ $(document).ready(function () {
             // wir löschen den task
             $task = $task.parent();
             var taskId = $task.data('taskid');
-            taskDS.taskLoeschen(taskId);
+            taskDS.taskLoeschen(projekt,taskId);
             $task.remove();
 
         }

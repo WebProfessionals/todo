@@ -58,12 +58,12 @@ var taskDS = function () {
      * Löscht einen Task anhand der übergebenen ID
      * @param taskId (id) ID eines Tasks
      */
-    function taskLoeschen(taskId) {
+    function taskLoeschen(projekt,taskId) {
         //TODO: Server über Löschen benachrichtigen
         $.ajax({
             type:"POST",
-            url:"/api/deleteTask.php",
-            data:{task:taskId},
+            data:{listeID:projekt,taskID:taskId},
+            url: 'api/task.php?method=delete',
             success: function (r) {
                 console.log(taskId + ' wurde gelöscht');
             },
