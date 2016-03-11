@@ -12,19 +12,19 @@ var taskDS = function () {
 
     /**
      * Aktualisiert den Task auf dem Server
-     * @param id (id) ID des Tasks
+     * @param projekt (id) name des Projekts
+     * @param taskID (id) ID des Tasks
      * @param text (string) Neuer Text vom Task
      */
     function updateTask(projekt, taskID, text) {
         
         $.ajax({
-            type: 'GET',
+            type: 'POST',
             dataType: "json",
             data:{listeID:projekt,task:text,taskID:taskID},
             url: 'api/task.php?method=update',
             success: function (jsonBody) {
                 callback(jsonBody.id);
-
             },
             error: function (error) {
                 alert(error);
@@ -104,7 +104,12 @@ var taskDS = function () {
             }
         });
     };
-
+    /**
+     * Ladet eine Taskliste vom Server
+     * @param projektListe (id) Id einer Liste (im Moment ein String :-( )
+     * @param callback (function) Die Funktion die ausgeführt wird wenn wir die Liste bekommen haben
+     * @constructor
+     */
     function TasklisteLaden(projektListe, callback) {
 
         if (projektListe === "-1") {
@@ -114,14 +119,13 @@ var taskDS = function () {
 
         } else {
             unserAktuellesProjekt = projektListe;
-
             $.ajax({
                 type: 'GET',
                 dataType: "json",
                 data:{id:projektListe},
                 url: 'api/task.php?method=list',
                 success: function (jsonBody) {
-                    callback('#taskliste',jsonBody);
+                    callback(jsonBody);
 
                 },
                 error: function (error) {

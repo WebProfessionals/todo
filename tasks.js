@@ -24,6 +24,7 @@ $(document).ready(function () {
         $('.projektauswahl').append($option);
 
         taskDS.TasklisteLaden(projekt,TasklisteAktualisieren);
+        
     });
     
 
@@ -92,8 +93,8 @@ $(document).ready(function () {
      * @param selector (selector) Selektor für Zielelement and das die li angehängt werden
      * @param daten (json) Daten
      */
-    function TasklisteAktualisieren(selector, daten) {
-        var $taskliste = $(selector);
+    function TasklisteAktualisieren(daten) {
+        var $taskliste = $('#taskliste');
         $taskliste.find('li').remove();
         daten.tasks.forEach(function (element) {
 
