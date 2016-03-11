@@ -16,15 +16,15 @@ var taskDS = function () {
      * @param taskID (id) ID des Tasks
      * @param text (string) Neuer Text vom Task
      */
-    function updateTask(projekt, taskID, text) {
+    function updateTask(projekt, taskID, text, callback) {
         
         $.ajax({
             type: 'POST',
             dataType: "json",
             data:{listeID:projekt,task:text,taskID:taskID},
             url: 'api/task.php?method=update',
-            success: function (jsonBody) {
-                callback(jsonBody.id);
+            success: function (r) {
+                callback(r);
             },
             error: function (error) {
                 alert(error);

@@ -111,7 +111,9 @@ $(document).ready(function () {
             var $task = $(event.target);
             var neuerTextvomTask = $task[0].innerText;
             var idvomTask = $task.data('taskid');
-            taskDS.updateTask(projekt,idvomTask,neuerTextvomTask);
+            taskDS.updateTask(projekt,idvomTask,neuerTextvomTask,function (r) {
+                $('.eingabe').focus();
+            });
         }
     });
 
