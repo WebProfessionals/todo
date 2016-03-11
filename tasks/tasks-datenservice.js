@@ -32,6 +32,9 @@ var taskDS = function () {
         });
     }
 
+
+   
+
     /**
      * Fügt einen neuen Task auf dem Server hinzu
      * @param task (string) Text vom Task
@@ -74,11 +77,24 @@ var taskDS = function () {
     };
 
 
-    function taskAktualisieren(task, zielzustand) {
-        //TODO: Daten an den Server senden
-        //Todo:: sende die daten an den Server
-        console.dir(arguments);
-    }
+    
+        function taskAktualisieren(projekt, taskID, erledigt, callback) {
+
+            $.ajax({
+                type: 'POST',
+                dataType: "json",
+                data:{listeID:projekt,istErledigt:erledigt,taskID:taskID},
+                url: 'api/task.php?method=check',
+                success: function (r) {
+                    if(isFunction(callback)){
+                        callback(r);
+                    }
+                },
+                error: function (error) {
+                    alert(error);
+                }
+            });
+        }
 
     
     function projektListeLaden(callback) {
@@ -136,3 +152,7 @@ var taskDS = function () {
     }
 }();
 
+function isFunction(functionToCheck) {
+    var getType = {};
+    return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
+}

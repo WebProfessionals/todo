@@ -15,6 +15,9 @@ switch ($_REQUEST['method']) {
     case "update":
         include("task/update.php");
         break;
+    case "check":
+        include("task/check.php");
+        break;
     default:
         header("HTTP/1.0 400 Unerlaubte Methode");
 

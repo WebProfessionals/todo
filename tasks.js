@@ -127,7 +127,7 @@ $(document).ready(function () {
             var neuerZustand = !$task.data('erledigt');
             $task.data('erledigt', neuerZustand);
             $task.toggleClass('erledigt');
-            taskDS.taskAktualisieren(taskId, neuerZustand);
+            taskDS.taskAktualisieren(projekt,taskId, neuerZustand);
         }
 
         if ($task.is('span') && modus === 'edit') {
