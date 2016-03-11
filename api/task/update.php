@@ -10,15 +10,20 @@
 $task = $_REQUEST["task"];
 $listeID = $_REQUEST["listeID"];
 $taskID = $_REQUEST["taskID"];
-
-
 $file = "../data/{$listeID}.json";
 
 if(file_exists($file)){
     $fp = fopen($file,'r');
     $json = fread($fp,filesize($file));
     $liste = json_decode($json,true);
-    $liste["tasks"][$taskID]["task"] = $task;
+
+    foreach ($liste["tasks"] as $i => $item) {
+        if($item["id"] == $taskID){
+            $liste["tasks"][$i]["task"] = $task;
+        }
+    }
+
+
 
     $json = json_encode($liste);
     file_put_contents($file,$json);
