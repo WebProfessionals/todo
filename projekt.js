@@ -77,8 +77,12 @@ $(document).ready(function () {
     // Projekt an server schicken und in die Liste eintragen
     function projektAdden(projektname) {
         //TODO:: projektname an den Server senden
-        var id = projektname;
-        addProjekt(projektname, id);
+        todo.projektDS.create(projektname,callback);
+        function callback(data) {
+            var id = data.id;
+            addProjekt(projektname, id);
+        }
+        
     }
 
 

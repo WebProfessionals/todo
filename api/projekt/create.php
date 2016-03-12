@@ -28,4 +28,7 @@ file_put_contents("../data/{$projektcounter}.json",$taskliste);
 // neuen projektcounter speichern
 file_put_contents($counterfile, ++$projektcounter);
 
-// id oder ganze liste zurückgeben
+// id zurückgeben
+header('Content-Type: application/json');
+echo '{"id":' . (--$projektcounter) . '}';
+
