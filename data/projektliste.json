@@ -1,11 +1,11 @@
 [
   {
-    "id": "erdnuss",
+    "id": 1,
     "label": "Erdnuss",
     "alleTasksErledigt": true
   },
   {
-    "id": "mega",
+    "id": 2,
     "label": "Mega",
     "alleTasksErledigt": false
   }
