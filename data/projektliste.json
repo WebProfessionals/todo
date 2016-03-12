@@ -8,10 +8,5 @@
     "id": "mega",
     "label": "Mega",
     "alleTasksErledigt": false
-  },
-  {
-    "id": "koko",
-    "label": "Kokosnuss",
-    "alleTasksErledigt": false
   }
 ]

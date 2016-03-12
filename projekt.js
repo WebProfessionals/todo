@@ -25,6 +25,7 @@ $(document).ready(function () {
     // Projektliste laden
     $.ajax({
         type: 'GET',
+        dataType: "json",
         url: 'data/projektliste.json',
         success: projektlisteParsen,
         error: function () {

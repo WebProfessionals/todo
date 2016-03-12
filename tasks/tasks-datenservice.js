@@ -1,4 +1,4 @@
-var taskDS = function () {
+todo.taskDS = function () {
 'use strict';
 
     return {
@@ -86,7 +86,7 @@ var taskDS = function () {
                 data:{listeID:projekt,istErledigt:erledigt,taskID:taskID},
                 url: 'api/task.php?method=check',
                 success: function (r) {
-                    if(isFunction(callback)){
+                    if(todo.isFunction(callback)){
                         callback(r);
                     }
                 },
@@ -152,7 +152,3 @@ var taskDS = function () {
     }
 }();
 
-function isFunction(functionToCheck) {
-    var getType = {};
-    return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
-}

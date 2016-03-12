@@ -8,7 +8,7 @@ $(document).ready(function () {
     
     
     //init
-    taskDS.projektListeLaden( function (serverAntwort) {
+    todo.taskDS.projektListeLaden( function (serverAntwort) {
         if (projekt) {
             // dropdown auf gewähltes Projekt setzen
             $('.projektauswahl').val(projekt);
@@ -23,7 +23,7 @@ $(document).ready(function () {
         });
         $('.projektauswahl').append($option);
 
-        taskDS.TasklisteLaden(projekt,TasklisteAktualisieren);
+        todo.taskDS.TasklisteLaden(projekt,TasklisteAktualisieren);
         
     });
     
@@ -36,7 +36,7 @@ $(document).ready(function () {
         if (e.charCode === 13) {
 
             var text = this.value;
-            var id = taskDS.neuenTaskHinzufuegen(projekt,text,function (id) {
+            var id = todo.taskDS.neuenTaskHinzufuegen(projekt,text,function (id) {
                 var $task = taskRendern({'task': text, id: id, erledigt: false, faelligAm: null});
                 $('#taskliste').append($task);
             });
@@ -111,7 +111,7 @@ $(document).ready(function () {
             var $task = $(event.target);
             var neuerTextvomTask = $task[0].innerText;
             var idvomTask = $task.data('taskid');
-            taskDS.updateTask(projekt,idvomTask,neuerTextvomTask,function (r) {
+            todo.taskDS.updateTask(projekt,idvomTask,neuerTextvomTask,function (r) {
                 $('.eingabe').focus();
             });
         }
@@ -127,14 +127,14 @@ $(document).ready(function () {
             var neuerZustand = !$task.data('erledigt');
             $task.data('erledigt', neuerZustand);
             $task.toggleClass('erledigt');
-            taskDS.taskAktualisieren(projekt,taskId, neuerZustand);
+            todo.taskDS.taskAktualisieren(projekt,taskId, neuerZustand);
         }
 
         if ($task.is('span') && modus === 'edit') {
             // wir löschen den task
             $task = $task.parent();
             var taskId = $task.data('taskid');
-            taskDS.taskLoeschen(projekt,taskId);
+            todo.taskDS.taskLoeschen(projekt,taskId);
             $task.remove();
 
         }
