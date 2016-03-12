@@ -7,7 +7,7 @@
  * Wir werden hier die Taskliste eines Projektes ausgeben
  */
 
-$id = $_REQUEST["id"];
+$id = basename($_REQUEST["id"]);
 
 $fp = fopen("../data/{$id}.json",'rb');
 if($fp != false){

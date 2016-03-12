@@ -6,11 +6,18 @@
  * Time: 11:54
  */
 
+if($_REQUEST["istErledigt"]=="true"){
+    $istErledigt = true;
+}else{
+    $istErledigt = false;
+}
 
-$istErledigt = boolval($_REQUEST["istErledigt"]);
-$listeID = $_REQUEST["listeID"];
+$listeID = basename( $_REQUEST["listeID"]);
 $taskID = $_REQUEST["taskID"];
 $file = "../data/{$listeID}.json";
+
+//-----------------------
+
 
 if(file_exists($file)){
     $fp = fopen($file,'r');

@@ -1,5 +1,5 @@
 var taskDS = function () {
-
+'use strict';
 
     return {
         taskAktualisieren: taskAktualisieren,
@@ -134,7 +134,7 @@ var taskDS = function () {
 
 
         } else {
-            unserAktuellesProjekt = projektListe;
+            var unserAktuellesProjekt = projektListe;
             $.ajax({
                 type: 'GET',
                 dataType: "json",
