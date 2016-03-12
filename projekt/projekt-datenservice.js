@@ -8,7 +8,7 @@ todo.projektDS = function () {
     };
 
     function update(projektid, name, callback) {
-     
+     // mit ajax an den server senden
     }
 
     function create(name, callback) {
