@@ -1,11 +1,1 @@
-{
-  "projektname": "Mega",
-  "tasks": [
-    {
-      "id": 0,
-      "task": "A1 00",
-      "erledigt": true
-    }
-  ],
-  "idcounter": 3
-}
+{"projektname":"Raphael","tasks":[{"id":0,"task":"A1 00","erledigt":true}],"idcounter":3}

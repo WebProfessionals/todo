@@ -76,7 +76,6 @@ $(document).ready(function () {
 
     // Projekt an server schicken und in die Liste eintragen
     function projektAdden(projektname) {
-        //TODO:: projektname an den Server senden
         todo.projektDS.create(projektname,callback);
         function callback(data) {
             var id = data.id;
@@ -92,11 +91,12 @@ $(document).ready(function () {
             event.preventDefault(); // event nicht weiter geben
             var $projekt = $(event.target); // auf welchem element ist es passiert
             var idVomProjekt = $projekt.attr('id');
-
-
             var neuerName = $projekt.text();
-            //TODO:: änderung an den Server schicken
-
+            todo.projektDS.update(idVomProjekt,neuerName,callback);
+            
+        }
+        function callback() {
+            return true;
         }
     });
 
