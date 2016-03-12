@@ -1,6 +1,4 @@
 #Beispiel TODO APP
 
-Aufgabe: PHP update Task schreiben. 
+Aufgabe: Projektliste löschen auf der API implementieren
 
-TIPP: ist sehr ähnlich dem create Task
- 
