@@ -10,10 +10,10 @@ todo.projektDS = function () {
     function update(projektid, name, callback) {
      // mit ajax an den server senden
         $.ajax({
-            url: "/api/projekt.php?method=update",
+            url: '/api/projekt.php?method=update',
             data: {name: name, projektId:projektid},
             type: 'POST',
-            dataType: "json",
+            dataType: 'json',
             success: callback
         });
 
@@ -22,10 +22,10 @@ todo.projektDS = function () {
     function create(name, callback) {
 
         $.ajax({
-            url: "/api/projekt.php?method=create",
+            url: '/api/projekt.php?method=create',
             data: {name: name},
             type: 'POST',
-            dataType: "json",
+            dataType: 'json',
             success: callback
         });
 
