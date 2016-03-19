@@ -3,9 +3,22 @@ todo.projektDS = function () {
 
     return {
         create: create,
-        update: update
+        update: update,
+        deleteProjekt: deleteProjekt,
+        projektListeLaden:projektListeLaden
 
     };
+
+    function deleteProjekt(projektid, callback) {
+     // mit ajax an den server senden
+        $.ajax({
+            url: '/api/projekt.php?method=delete',
+            data: {name: name, projektId:projektid},
+            type: 'POST',
+            
+            success: callback
+        });
+    }
 
     function update(projektid, name, callback) {
      // mit ajax an den server senden
@@ -31,4 +44,16 @@ todo.projektDS = function () {
 
 
     }
+
+    function projektListeLaden(callback) {
+        $.ajax({
+            type: 'GET',
+            dataType: "json",
+            url: 'api/projekt.php?method=list',
+            success: callback,
+            error: function () {
+                alert("Der Server ist kapputt");
+            }
+        });
+    };
 }();

@@ -101,7 +101,7 @@ todo.taskDS = function () {
         $.ajax({
             type: 'GET',
             dataType: "json",
-            url: 'data/projektliste.json',
+            url: 'api/projekt.php?method=list',
             success: function (projektJson) {
 
                 projektJson.forEach(function (element) {

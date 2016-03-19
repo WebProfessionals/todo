@@ -22,17 +22,7 @@ $(document).ready(function () {
 
     });
 
-    // Projektliste laden
-    $.ajax({
-        type: 'GET',
-        dataType: "json",
-        url: 'data/projektliste.json',
-        success: projektlisteParsen,
-        error: function () {
-            alert("Der Server ist kapputt");
-        }
-    });
-
+   todo.projektDS.projektListeLaden(projektlisteParsen);
 
     function projektlisteParsen(jsondata) {
 
@@ -127,7 +117,10 @@ $(document).ready(function () {
     });
 
     function projektLoeschen(projektID) {
-        //TODO: Info an server senden, er soll bitte das Projekt mit der entsprechenden ID löschen
+        todo.projektDS.deleteProjekt(projektID, function () {
+            alert('hat geklappt');
+        });
+
     }
 
 });
